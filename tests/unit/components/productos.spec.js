@@ -4,6 +4,6 @@ describe('Catlogo Productos', () => {
   test('Error en el catlago de productos', () => {
     const consulta = consultaProducto();
 
-    expect(consulta.length).toBe(4)
+    expect(consulta.length).toBe(5)
   })
 })
