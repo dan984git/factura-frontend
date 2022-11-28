@@ -1,0 +1,27 @@
+services:
+  spring:
+    image: 'ayamba87/springprueba:0.1'
+    container_name: spring-serviceprueba
+    build:
+      context: https://github.com/dan984git/backend-factura.git#master
+      dockerfile: Dockerfile
+    expose:
+      - "8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=jdbc:sqlserver://db-srv-msoft.database.windows.net:1433;database=FacturaCompose
+      - SPRING_DATASOURCE_USERNAME=usralx
+      - SPRING_DATASOURCE_PASSWORD=sa.123456
+  vue:
+    image: 'ayamba87/factura-docker'
+    container_name: vue-serviceprueba
+    build:
+      context: https://github.com/ayamba87/factura-docker.git#main
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - spring
+    
+volumes:
+  db-data:
