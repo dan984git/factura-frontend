@@ -34,7 +34,7 @@
           <v-col>
             <v-sheet min-height="70vh" rounded="lg">
               <v-card>
-                <v-card-title>Codigo Factura #{{numeroFactura}}</v-card-title>
+                <v-card-title>Nueva Factura #{{numeroFactura}}</v-card-title>
                 <v-card-text>
                   <v-form
                     ref="form"
