@@ -67,7 +67,7 @@ spec:
         "kubernetes.io/os": linux
       containers:
       - name: azure-vote-front
-        image: dan984/vuep:0.1
+        image: contregistryby.azurecr.io/factura
         resources:
           requests:
             cpu: 100m
