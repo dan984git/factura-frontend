@@ -13,7 +13,7 @@ services:
       - SPRING_DATASOURCE_USERNAME=usralx
       - SPRING_DATASOURCE_PASSWORD=sa.123456
   vue:
-    image: "contregistryby.azurecr.io/factura"
+    image: "dan984/vuep:0.1"
     container_name: vue-serviceprueba
     build:
       context: https://github.com/dan984git/factura-frontend.git#master
