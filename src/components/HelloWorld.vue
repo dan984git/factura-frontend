@@ -34,7 +34,7 @@
           <v-col>
             <v-sheet min-height="70vh" rounded="lg">
               <v-card>
-                <v-card-title>Nueva Factura Para AKS V1 #{{numeroFactura}}</v-card-title>
+                <v-card-title>Nueva Factura Para AKS V2 #{{numeroFactura}}</v-card-title>
                 <v-card-text>
                   <v-form
                     ref="form"
