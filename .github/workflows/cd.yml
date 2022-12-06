@@ -1,0 +1,47 @@
+name: CD Imagen docker - despliegue k8s
+
+on:
+  push:
+    branches: master
+
+jobs:
+  login:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      -
+        name: Login en ACR
+        uses: docker/login-action@v2
+        with:
+          registry: burbanoyambacicd.azurecr.io
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+            
+      - run: |
+          docker build . -t burbanoyambacicd.azurecr.io/facturafinal:latest
+          docker push burbanoyambacicd.azurecr.io/facturafinal:latest
+        
+      # Operaciones kubernetes.
+      - uses: Azure/aks-set-context@v1
+        with:
+          creds: '${{ secrets.AZURE_CREDENTIALS }}'
+          cluster-name: myakscluster
+          resource-group: aksburbanoyamba
+
+      - uses: Azure/k8s-create-secret@v1
+        with:
+          container-registry-url: burbanoyambacicd.azurecr.io
+          container-registry-username: ${{ secrets.ACR_USERNAME }}
+          container-registry-password: ${{ secrets.ACR_PASSWORD }}
+          secret-name: k8s-secret
+
+      - uses: Azure/k8s-deploy@v1
+        with:
+          manifests: |
+            manifests/deployment.yaml
+            manifests/service.yaml
+          images: |
+            burbanoyambacicd.azurecr.io/facturafinal:latest
+          imagepullsecrets: |
+            k8s-secret
