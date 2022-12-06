@@ -16,7 +16,7 @@ spec:
         "kubernetes.io/os": linux
       containers:
       - name: vue
-        image: burbanoyambacicd.azurecr.io/facturafinal
+        image: burbanoyambacicd.azurecr.io/facturafinal:latest
         resources:
           requests:
             cpu: 100m
