@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: vue-ingress
+  annotations:
+    kubernetes.io/ingress.class: addon-http-application-routing
+spec:
+  rules:
+    - host: b31f2a2a78ee44a3a9f5.eastus.aksapp.io
+      http:
+        paths:
+          - path: /
+            backend:
+              service:
+                name: vue-service
+                port:
+                  name: http
+            pathType: Prefix
