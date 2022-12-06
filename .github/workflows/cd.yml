@@ -32,8 +32,8 @@ jobs:
           password: ${{ secrets.ACR_PASSWORD }}
             
       - run: |
-          docker build . -t burbanoyambacicd.azurecr.io/facturafinal:latest
-          docker push burbanoyambacicd.azurecr.io/facturafinal:latest
+          docker build . -t burbanoyambacicd.azurecr.io/facturafinal:${{ github.sha }}
+          docker push burbanoyambacicd.azurecr.io/facturafinal:${{ github.sha }}
         
       # Operaciones kubernetes.
       - uses: Azure/aks-set-context@v1
@@ -56,6 +56,6 @@ jobs:
             manifests/deployment.yaml
             manifests/service.yaml
           images: |
-            burbanoyambacicd.azurecr.io/facturafinal:latest
+            burbanoyambacicd.azurecr.io/facturafinal:${{ github.sha }}
           imagepullsecrets: |
             k8s-secret
