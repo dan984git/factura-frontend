@@ -1,17 +1,29 @@
-name: CD Imagen docker - despliegue k8s
+name: CD - despliegue k8s
 
 on:
   push:
     branches: master
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup Node.js 16.x
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16.x
+
+    - name: Build
+      run: npm install
+      
   login:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
 
-      -
-        name: Login en ACR
+      - name: Login en ACR
         uses: docker/login-action@v2
         with:
           registry: burbanoyambacicd.azurecr.io
